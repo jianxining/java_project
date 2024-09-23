@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace等于mapper接口类的全限定名,这样实现对应 -->
+<mapper namespace="com.atguigu.mapper.EmployeeMapper">
+
+    <select id="query" resultType="employee">
+        select * from t_emp
+        <where>
+            <if test="name != null">
+                    emp_name == #{name}
+            </if>
+            <if test="salary != null">
+                and emp_salary = #{salary}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryBatch" resultType="employee">
+        select * from t_emp
+        where emp_id in
+            <foreach collection="ids" open="(" separator="," close=")" item="id">
+                #{id}
+            </foreach>
+    </select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace等于mapper接口类的全限定名,这样实现对应 -->
+<mapper namespace="com.atguigu.mapper.EmployeeMapper">
+
+    <delete id="deleteById">
+        delete from t_emp where emp_id = #{empId};
+    </delete>
+
+<!--  返回单个简单类型如何指定？
+
+ resultType写法
+               类的全限定符号  java.lang.String
+               别名的简称   string
+
+ -->
+    <select id="queryNameById" resultType="string">
+        select emp_name from t_emp where emp_id = #{id};
+    </select>
+
+
+<!--    返回值是集合，resultType不需要指定集合，反而需要指定集合的泛型-->
+    <select id="queryNameUpSalaryBySalary" resultType="string">
+        select emp_name from t_emp where emp_salary > #{salary};
+    </select>
+
+
+<!--    主键回显
+        useGeneratedKeys="true" 表明我们想要数据库的主键值
+        keyColumn="emp_id" 对应主键值的列
+        keyProperty="empId" 把值赋给实体类的某个属性的属性名
+
+-->
+    <insert id="insertEmployee" useGeneratedKeys="true" keyColumn="emp_id" keyProperty="empId">
+        insert into t_emp(emp_name,emp_salary)
+            value(#{empName},#{empSalary})
+    </insert>
+</mapper>

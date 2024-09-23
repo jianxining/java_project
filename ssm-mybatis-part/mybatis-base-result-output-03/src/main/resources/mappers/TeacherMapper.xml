@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace等于mapper接口类的全限定名,这样实现对应 -->
+<mapper namespace="com.atguigu.mapper.TeacherMapper">
+
+
+<!--    teacher的数据库的t_id是其主键，但不是自增长类型的-->
+<insert id="insertTeacher">
+    <selectKey order="BEFORE" resultType="string" keyProperty="tId">
+        select replace(UUID(),'-','')
+    </selectKey>
+    insert into teacher(t_id,t_name)
+        value(#{tId},#{tName})
+</insert>
+
+
+<!--    resultMap 自定义映射关系，可以单层次映射，也可以多层次映射-->
+    <resultMap id="t_map" type="com.atguigu.pojo.Teacher">
+        <id column="t_id" property="tId"/>
+        <result column="t_name" property="tName"/>
+    </resultMap>
+
+    <select id="queryById" resultMap="t_map">
+        select * from teacher where t_id = #{tId}
+    </select>
+
+
+</mapper>

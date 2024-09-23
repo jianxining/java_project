@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="beanOne" class="com.atguigu.ioc_04.BeanOne" init-method="init"/>
+    <bean id="beanTwo" class="com.atguigu.ioc_04.BeanTwo" destroy-method="cleanup"/>
+
+    <bean id="singlePro" class="com.atguigu.ioc_04.Single_pro" scope="prototype"/>
+</beans>

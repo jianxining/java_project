@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+<!--    可以使用无参数进行实例化的组件，如何配置-->
+<!--    id必须是小写字母开头-->
+    <!--    写两遍，将一个组件类声明两个组件信息，默认是单例模式，所以会实例化两个组件对象-->
+    <bean id="happyComponent1" class="com.atguigu.ioc_01.HappyComponent"/>
+<!--    静态工程类如何声明工厂方法进行ioc设置-->
+<!--    class是工厂的全限定符
+        factory-method:工厂方法，必须是静态的
+-->
+    <bean id="clientService" class="com.atguigu.ioc_01.ClientService" factory-method="createInstance"/>
+<!--    非静态工厂的配置-->
+
+</beans>

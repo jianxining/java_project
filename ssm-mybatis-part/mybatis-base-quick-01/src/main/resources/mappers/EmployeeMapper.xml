@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace等于mapper接口类的全限定名,这样实现对应 -->
+<mapper namespace="com.atguigu.mapper.EmployeeMapper">
+
+    <!-- 查询使用 select标签
+            id = 方法名
+            resultType = 返回值类型
+            标签内编写SQL语句
+     -->
+    <!--
+    xml是写Mybatis的sql语句的地方
+    不需要我们去编写Java的代码
+    但是我们不能随意的书写
+    需要有约束的文件
+
+    select insert update delete
+
+    mapper不能重载
+    -->
+
+    <select id="queryById" resultType="com.atguigu.pojo.Employee">
+        select emp_id empId,emp_name empName, emp_salary empSalary from
+        t_emp where emp_id = #{empId}
+    </select>
+
+<!--    delete 的resultType的类型默认为int 型-->
+    <delete id="deleteById">
+        delete from t_emp where emp_id = #{empId}
+    </delete>
+    <select id="queryBySalary" resultType="com.atguigu.pojo.Employee">
+        select emp_id empId,emp_name empName,emp_salary empSalary
+        from t_emp where emp_salary = #{empSalary};
+    </select>
+<!--    key等于属性名即可-->
+    <update id="insertEmp">
+        insert into t_emp(emp_name,emp_salary) values(#{empName},#{empSalary});
+    </update>
+
+<!--    传入多个简单数据-->
+
+    <select id="queryByNameAndSalary" resultType="com.atguigu.pojo.Employee">
+        select emp_id empId,emp_name empName,emp_salary empSalary
+        from t_emp where emp_name = #{empName} and emp_salary = #{empSalary};
+    </select>
+
+    <update id="insertMap">
+        insert into t_emp(emp_name,emp_salary) values(#{empName},#{empSalary});
+    </update>
+</mapper>

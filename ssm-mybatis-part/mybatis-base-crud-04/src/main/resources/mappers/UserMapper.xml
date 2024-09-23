@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace等于mapper接口类的全限定名,这样实现对应 -->
+<mapper namespace="com.atguigu.mapper.UserMapper">
+
+<!--    如果传入的是实体类，占位符写属性名即可-->
+    <insert id="insert">
+        insert into user(username,password) value(#{username},#{password});
+    </insert>
+
+<!--    根据id去修改对应User的username和password-->
+    <update id="update">
+        update user set username=#{username} , password = #{password}
+            where id = #{id};
+    </update>
+
+<!--  根据id去删除user  -->
+    <delete id="delete">
+        delete user where id = #{id};
+    </delete>
+
+<!--    利用resultMap完成属性名的映射-->
+    <resultMap id="user_map" type="com.atguigu.pojo.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+    </resultMap>
+    <select id="selectById" resultMap="user_map">
+        select * from user where id = #{id};
+    </select>
+
+    <select id="selectAll" resultType="user">
+        select * from user;
+    </select>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+<!--    引用和被引用，必须全部在IOC中-->
+<!--    单个组件类通过构造函数注入-->
+
+    <bean id="userDao" class="com.atguigu.ioc_02.UserDao"/>
+    <bean id="userService" class="com.atguigu.ioc_02.UserService">
+<!--        注入
+            直接值：value
+            引用值：ref
+            场景1: 多参数，可以按照相应构造函数的顺序注入数据
+
+-->
+        <constructor-arg value="18"/>
+        <constructor-arg value="JianXinNing"/>
+        <constructor-arg ref="userDao"/>
+    </bean>
+
+
+    <bean id="userService1" class="com.atguigu.ioc_02.UserService">
+<!--        有参-->
+        <constructor-arg name="age" value="18"/>
+        <constructor-arg name="name" value="涧西宁"/>
+        <constructor-arg ref="userDao"/>
+    </bean>
+
+    <bean id="movieFinder" class="com.atguigu.ioc_02.MovieFinder"/>
+    <bean id="simpleMovieLister" class="com.atguigu.ioc_02.SimpleMovieLister">
+        <property name="movieFinder" ref="movieFinder"/>
+        <property name="movieName" value="陶孟春"/>
+    </bean>
+
+</beans>
